@@ -4,13 +4,6 @@ host = os.getenv('FILM_API_HOST', '127.0.0.1:5000')
 scheme = [x for x in [os.getenv('FILM_API_SCHEME')] if x]
 tag = os.getenv('AMAZON_ID_TAG')
 
-if host == '127.0.0.1:5000':
-    debug = True
-    threaded = False
-else:
-    debug = False
-    threaded = True
-
 template = {
   # "host": "film.vonapp.co",
   "host": host,
@@ -47,6 +40,13 @@ swagger_config = {
     "specs_route": "/api/spec/",
     'title': 'Filmography API',
 }
+
+if host == '127.0.0.1:5000':
+    debug = True
+    threaded = False
+else:
+    debug = False
+    threaded = True
 
 print(' * Host:', host)
 print(' * Scheme:', scheme)
