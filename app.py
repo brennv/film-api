@@ -12,9 +12,9 @@ api.add_resource(Health, '/api/health')
 api.add_resource(FilmSearch, '/api/films/search/<string:term>')
 
 
-# @app.route('/')
-# def index():
-#     return redirect('/api/spec/')
+@app.route('/')
+def index():
+    return redirect('/api/spec/')
 
 
 @app.errorhandler(404)
@@ -23,4 +23,4 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=False)
+    app.run(debug=debug, threaded=threaded)

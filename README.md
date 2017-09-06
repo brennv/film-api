@@ -2,7 +2,7 @@
 
 RESTful mash-up of theMovieDB and Amazon Product APIs http://film.vonapp.co
 
-See: [film.vonapp.co](https://film.vonapp.co/api/spec/)
+See: [film.vonapp.co](http://film.vonapp.co)
 
 ## Endpoints
 
