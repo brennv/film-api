@@ -12,9 +12,9 @@ api.add_resource(Health, '/api/health')
 api.add_resource(FilmSearch, '/api/films/search/<string:term>')
 
 
-@app.route('/')
-def index():
-    return redirect('/api/spec/')
+# @app.route('/')
+# def index():
+#     return redirect('/api/spec/')
 
 
 @app.errorhandler(404)
