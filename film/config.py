@@ -1,7 +1,7 @@
 import os
 
 host = os.getenv('FILM_API_HOST', '127.0.0.1:5000')
-scheme = [x for x in [os.getenv('FILM_API_SCHEME')] if x]
+scheme = [x for x in [os.getenv('FILM_API_SCHEME', '')] if x]
 tag = os.getenv('AMAZON_ID_TAG')
 
 template = {
