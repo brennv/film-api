@@ -8,7 +8,8 @@ template = {
   # "host": "film.vonapp.co",
   "host": host,
   # "schemes": ["https"],
-  "schemes": scheme,
+  # "schemes": scheme,
+  "schemes": ["https", "http"],
   "swagger": "2.0",
   "info": {
     "title": "Filmography API",
