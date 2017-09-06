@@ -1,15 +1,15 @@
 import os
 
 host = os.getenv('FILM_API_HOST', '127.0.0.1:5000')
-scheme = [x for x in [os.getenv('FILM_API_SCHEME', '')] if x]
+scheme = [x for x in [os.getenv('FILM_API_SCHEME')] if x]
 tag = os.getenv('AMAZON_ID_TAG')
 
 template = {
   # "host": "film.vonapp.co",
   "host": host,
   # "schemes": ["https"],
-  # "schemes": scheme,
-  "schemes": ["https", "http"],
+  "schemes": scheme,
+  # "schemes": ["https", "http"],
   "swagger": "2.0",
   "info": {
     "title": "Filmography API",
