@@ -4,32 +4,31 @@ from amazon.api import AmazonAPI
 # from concurrent.futures import ThreadPoolExecutor
 
 amazon = AmazonAPI(amazon_access, amazon_secret, amazon_tag)
+attrs = ['asin', 'actors', 'directors', 'genre', 'offer_url', 'product_group',
+'product_type_name', 'studio', 'title', 'large_image_url', 'medium_image_url',
+'small_image_url', 'tiny_image_url']
+
+def get_film(id):
+    item = {}
+    try:
+        r = amazon.lookup(ItemId=id)
+       item = {a: r.get_attribute(a) for a in attrs}
+    except urllib.error.HTTPError:
+        # TODO https://stackoverflow.com/questions/25344610/python-http-error-503-service-unavailable
+        pass
+    return item
 
 
-def get_films(keywords, index='Movies'):
+def search_films(keywords, index='Movies'):
     films = []
     results = amazon.search(Keywords=keywords, SearchIndex=index)
     # with ThreadPoolExecutor() as executor:
     try:
         for r in results:
-            item = {}
-            item['actors'] = r.actors
-            item['directors'] = r.directors
-            item['genre'] = r.genre
-            item['offer_ur'] = r.offer_url
-            item['product_group'] = r.product_group
-            item['product_type_name'] = r.product_type_name
-            # item['release_date'] = r.release_date
-            item['studio'] = r.studio
-            item['title'] = r.title
-            item['large_image_url'] = r.large_image_url
-            item['medium_image_url'] = r.medium_image_url
-            item['small_image_url'] = r.small_image_url
-            item['tiny_image_url'] = r.tiny_image_url
+            item = {a: r.get_attribute(a) for a in attrs}
             films.append(item)
-            print(item, '\n')
-    except:
-        # print(e)
+            # print(item, '\n')
+    except urllib.error.HTTPError:
         pass
     return films
 
@@ -72,4 +71,24 @@ class FilmSearch(Resource):
          200:
            description: Search films
         """
-        return get_films(term), 200
+        return search_films(term), 200
+
+
+class Film(Resource):
+    def get(self, id):
+        """
+        Search films
+        ---
+        tags:
+          - films
+        parameters:
+          - name: id
+            in: path
+            type: string
+            required: true
+            default: bill murray
+        responses:
+         200:
+           description: Search films
+        """
+        return get_film(id), 200
