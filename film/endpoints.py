@@ -1,6 +1,7 @@
 from .config import amazon_access, amazon_secret, amazon_tag
 from flask_restful import Resource
 from amazon.api import AmazonAPI
+import urllib
 # from concurrent.futures import ThreadPoolExecutor
 
 amazon = AmazonAPI(amazon_access, amazon_secret, amazon_tag)
