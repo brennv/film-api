@@ -12,7 +12,7 @@ def get_film(id):
     item = {}
     try:
         r = amazon.lookup(ItemId=id)
-       item = {a: r.get_attribute(a) for a in attrs}
+        item = {a: r.get_attribute(a) for a in attrs}
     except urllib.error.HTTPError:
         # TODO https://stackoverflow.com/questions/25344610/python-http-error-503-service-unavailable
         pass
