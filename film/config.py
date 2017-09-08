@@ -53,6 +53,5 @@ else:
 
 print(' * Host:', host)
 print(' * Scheme:', scheme)
-print(' * Amazon tag:', tag)
 print(' * Debug:', debug)
 print(' * Threaded:', threaded)
