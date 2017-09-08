@@ -19,7 +19,7 @@ def get_films(keywords, index='Movies'):
             item['offer_ur'] = r.offer_url
             item['product_group'] = r.product_group
             item['product_type_name'] = r.product_type_name
-            item['release_date'] = r.release_date
+            # item['release_date'] = r.release_date
             item['studio'] = r.studio
             item['title'] = r.title
             item['large_image_url'] = r.large_image_url
@@ -27,6 +27,7 @@ def get_films(keywords, index='Movies'):
             item['small_image_url'] = r.small_image_url
             item['tiny_image_url'] = r.tiny_image_url
             films.append(item)
+            print(item, '\n')
         except HTTPError as e:
             # print(e)
             pass
