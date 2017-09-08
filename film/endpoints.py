@@ -12,15 +12,12 @@ def make_film(film):
             'actors': film.actors,
             'directors': film.directors,
             'genre': film.genre,
-            'offer_url': film.offer_url,
+            'url': film.offer_url,
             'product_group': film.product_group,
             'product_type_name': film.product_type_name,
             'studio': film.studio,
             'title': film.title,
-            'large_image_url': film.large_image_url,
-            'medium_image_url': film.medium_image_url,
-            'small_image_url': film.small_image_url,
-            'tiny_image_url': film.tiny_image_url}
+            'image': film.large_image_url}
     return film
 
 
@@ -47,6 +44,46 @@ def search_films(keywords, index='Movies'):
     except urllib.error.HTTPError:
         pass
     return films
+
+
+def get_film_title(id):
+    result = {}
+    try:
+        response = amazon.lookup(ItemId=id)
+        result = {'title': response.title}
+    except urllib.error.HTTPError:
+        pass
+    return result
+
+
+def get_film_actors(id):
+    result = {}
+    try:
+        response = amazon.lookup(ItemId=id)
+        result = {'actors': response.actors}
+    except urllib.error.HTTPError:
+        pass
+    return result
+
+
+def get_film_directors(id):
+    result = {}
+    try:
+        response = amazon.lookup(ItemId=id)
+        result = {'directors': response.directors}
+    except urllib.error.HTTPError:
+        pass
+    return result
+
+
+def get_film_image(id):
+    result = {}
+    try:
+        response = amazon.lookup(ItemId=id)
+        result = {'image': response.large_image_url}
+    except urllib.error.HTTPError:
+        pass
+    return result
 
 
 class Health(Resource):
@@ -93,7 +130,7 @@ class FilmSearch(Resource):
 class Film(Resource):
     def get(self, id):
         """
-        Search films
+        Film lookup
         ---
         tags:
           - films
@@ -102,9 +139,90 @@ class Film(Resource):
             in: path
             type: string
             required: true
-            default: bill murray
+            default: B0053ZTZNK
         responses:
          200:
-           description: Search films
+           description: Film lookup
         """
         return get_film(id), 200
+
+
+class FilmActors(Resource):
+    def get(self, id):
+        """
+        Actors
+        ---
+        tags:
+          - films
+        parameters:
+          - name: id
+            in: path
+            type: string
+            required: true
+            default: B0053ZTZNK
+        responses:
+         200:
+           description: Actors
+        """
+        return get_film_actors(id), 200
+
+
+class FilmDirectors(Resource):
+    def get(self, id):
+        """
+        Directors
+        ---
+        tags:
+          - films
+        parameters:
+          - name: id
+            in: path
+            type: string
+            required: true
+            default: B0053ZTZNK
+        responses:
+         200:
+           description: Directors
+        """
+        return get_film_directors(id), 200
+
+
+
+class FilmTitle(Resource):
+    def get(self, id):
+        """
+        Title
+        ---
+        tags:
+          - films
+        parameters:
+          - name: id
+            in: path
+            type: string
+            required: true
+            default: B0053ZTZNK
+        responses:
+         200:
+           description: Title
+        """
+        return get_film_title(id), 200
+
+
+class FilmImage(Resource):
+    def get(self, id):
+        """
+        Image
+        ---
+        tags:
+          - films
+        parameters:
+          - name: id
+            in: path
+            type: string
+            required: true
+            default: B0053ZTZNK
+        responses:
+         200:
+           description: Image
+        """
+        return get_film_image(id), 200

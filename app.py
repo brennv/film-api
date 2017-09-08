@@ -1,5 +1,6 @@
 from film.config import swagger_config, template, debug, threaded
-from film.endpoints import Health, Film, FilmSearch
+from film.endpoints import (Health, Film, FilmSearch, FilmImage, FilmTitle,
+                            FilmActors, FilmDirectors)
 from flask import Flask, jsonify, redirect
 from flask_restful import Api, Resource
 from flasgger import Swagger
@@ -10,6 +11,10 @@ swagger = Swagger(app, template=template, config=swagger_config)
 
 api.add_resource(Health, '/api/health')
 api.add_resource(Film, '/api/film/<string:id>')
+api.add_resource(FilmTitle, '/api/film/<string:id>/title')
+api.add_resource(FilmActors, '/api/film/<string:id>/actors')
+api.add_resource(FilmDirectors, '/api/film/<string:id>/directors')
+api.add_resource(FilmImage, '/api/film/<string:id>/image')
 api.add_resource(FilmSearch, '/api/films/search/<string:term>')
 
 
