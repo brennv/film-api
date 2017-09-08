@@ -8,6 +8,8 @@ amazon = AmazonAPI(amazon_access, amazon_secret, amazon_tag)
 
 
 def make_film(film):
+    date = f"{film.release_date:%Y-%m-%d}" if film.release_date else None
+    reviews = film.reviews[1]
     film = {'id': film.asin,
             'title': film.title,
             'actors': film.actors,
@@ -15,8 +17,12 @@ def make_film(film):
             'genre': film.genre,
             'product_group': film.product_group,
             'studio': film.studio,
+            'running_time': film.running_time,
+            'release_date': date,
             'url': film.offer_url,
-            'image': film.large_image_url}
+            'image': film.large_image_url,
+            'reviews': reviews,
+            }
     return film
 
 
