@@ -5,19 +5,34 @@ import urllib
 # from concurrent.futures import ThreadPoolExecutor
 
 amazon = AmazonAPI(amazon_access, amazon_secret, amazon_tag)
-attrs = ['asin', 'actors', 'directors', 'genre', 'offer_url', 'product_group',
-'product_type_name', 'studio', 'title', 'large_image_url', 'medium_image_url',
-'small_image_url', 'tiny_image_url']
+
+
+def make_film(film):
+    film = {'asin': film.asin,
+            'actors': film.actors,
+            'directors': film.directors,
+            'genre': film.genre,
+            'offer_url': film.offer_url,
+            'product_group': film.product_group,
+            'product_type_name': film.product_type_name,
+            'studio': film.studio,
+            'title': film.title,
+            'large_image_url': film.large_image_url,
+            'medium_image_url': film.medium_image_url,
+            'small_image_url': film.small_image_url,
+            'tiny_image_url': film.tiny_image_url}
+    return film
+
 
 def get_film(id):
-    item = {}
+    film = {}
     try:
-        r = amazon.lookup(ItemId=id)
-        item = {a: r.get_attribute(a) for a in attrs}
+        response = amazon.lookup(ItemId=id)
+        film = make_film(response)
     except urllib.error.HTTPError:
         # TODO https://stackoverflow.com/questions/25344610/python-http-error-503-service-unavailable
         pass
-    return item
+    return film
 
 
 def search_films(keywords, index='Movies'):
@@ -26,8 +41,8 @@ def search_films(keywords, index='Movies'):
     # with ThreadPoolExecutor() as executor:
     try:
         for r in results:
-            item = {a: r.get_attribute(a) for a in attrs}
-            films.append(item)
+            film = make_film(r)
+            films.append(film)
             # print(item, '\n')
     except urllib.error.HTTPError:
         pass
