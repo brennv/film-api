@@ -28,7 +28,7 @@ def get_films(keywords, index='Movies'):
             item['tiny_image_url'] = r.tiny_image_url
             films.append(item)
             print(item, '\n')
-        except HTTPError as e:
+        except:
             # print(e)
             pass
     return films
