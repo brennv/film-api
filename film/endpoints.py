@@ -1,7 +1,7 @@
 from .config import amazon_access, amazon_secret, amazon_tag
 from flask_restful import Resource
 from amazon.api import AmazonAPI
-from concurrent.futures import ThreadPoolExecutor
+# from concurrent.futures import ThreadPoolExecutor
 
 amazon = AmazonAPI(amazon_access, amazon_secret, amazon_tag)
 
@@ -9,23 +9,23 @@ amazon = AmazonAPI(amazon_access, amazon_secret, amazon_tag)
 def get_films(keywords, index='Movies'):
     films = []
     results = amazon.search(Keywords=keywords, SearchIndex=index)
-    with ThreadPoolExecutor() as executor:
-        for r in results:
-            item = {}
-            item['actors'] = r.actors
-            item['directors'] = r.directors
-            item['genre'] = r.genre
-            item['offer_ur']l= r.offer_url
-            item['product_group'] = r.product_group
-            item['product_type_name'] = r.product_type_name
-            item['release_date'] = r.release_date
-            item['studio'] = r.studio
-            item['title'] = r.title
-            item['large_image_url'] = r.large_image_url
-            item['medium_image_url'] = r.medium_image_url
-            item['small_image_url'] = r.small_image_url
-            item['tiny_image_url'] = r.tiny_image_url
-            films.append(item)
+    # with ThreadPoolExecutor() as executor:
+    for r in results:
+        item = {}
+        item['actors'] = r.actors
+        item['directors'] = r.directors
+        item['genre'] = r.genre
+        item['offer_ur'] = r.offer_url
+        item['product_group'] = r.product_group
+        item['product_type_name'] = r.product_type_name
+        item['release_date'] = r.release_date
+        item['studio'] = r.studio
+        item['title'] = r.title
+        item['large_image_url'] = r.large_image_url
+        item['medium_image_url'] = r.medium_image_url
+        item['small_image_url'] = r.small_image_url
+        item['tiny_image_url'] = r.tiny_image_url
+        films.append(item)
     return films
 
 
