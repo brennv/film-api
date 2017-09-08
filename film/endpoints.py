@@ -8,13 +8,12 @@ amazon = AmazonAPI(amazon_access, amazon_secret, amazon_tag)
 
 
 def make_film(film):
-    film = {'asin': film.asin,
+    film = {'id': film.asin,
             'actors': film.actors,
             'directors': film.directors,
             'genre': film.genre,
             'url': film.offer_url,
             'product_group': film.product_group,
-            'product_type_name': film.product_type_name,
             'studio': film.studio,
             'title': film.title,
             'image': film.large_image_url}
