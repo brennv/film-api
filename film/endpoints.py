@@ -58,7 +58,7 @@ class FilmSearch(Resource):
         tags:
           - films
         parameters:
-          - name: term
+          - name: keywords
             in: path
             type: string
             required: true
