@@ -27,8 +27,8 @@ def get_films(keywords, index='Movies'):
             item['small_image_url'] = r.small_image_url
             item['tiny_image_url'] = r.tiny_image_url
             films.append(item)
-        except urllib.error.HTTPError as e:
-            print(e)
+        except HTTPError as e:
+            # print(e)
             pass
     return films
 
