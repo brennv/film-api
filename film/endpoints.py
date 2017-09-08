@@ -51,14 +51,14 @@ class Health(Resource):
 
 
 class FilmSearch(Resource):
-    def get(self, keywords):
+    def get(self, term):
         """
         Search films
         ---
         tags:
           - films
         parameters:
-          - name: keywords
+          - name: term
             in: path
             type: string
             required: true
@@ -67,4 +67,4 @@ class FilmSearch(Resource):
          200:
            description: Search films
         """
-        return get_films(keywords), 200
+        return get_films(term), 200
